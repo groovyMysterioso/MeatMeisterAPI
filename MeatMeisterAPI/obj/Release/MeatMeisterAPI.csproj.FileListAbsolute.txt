@@ -82,10 +82,10 @@ C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\System.Web.WebPage
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\System.Web.WebPages.Razor.xml
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\Antlr3.Runtime.pdb
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.csprojAssemblyReference.cache
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.csproj.CoreCompileInputs.cache
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.csproj.CopyComplete
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.dll
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.pdb
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.Migrations.Initial.resources
 C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.csproj.GenerateResource.cache
+C:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Release\MeatMeisterAPI.csproj.AssemblyReference.cache

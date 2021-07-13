@@ -1,4 +1,5 @@
 ﻿<html lang="EN-US">
+
 <head>
     <title>Beef Miester</title>
     <meta charset="utf-8">
@@ -12,10 +13,10 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -30,11 +31,14 @@
             </form>
         </div>
         <table class="table">
-           <thead>
-               <tr>
-               <th>Customer Name</th><th>Customer Phone Number</th><th>Order Type</th><th>Rancher</th>
-               </tr>
-           </thead>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Customer Phone Number</th>
+                    <th>Order Type</th>
+                    <th>Rancher</th>
+                </tr>
+            </thead>
         </table>
     </div>
     <script>
@@ -42,10 +46,10 @@
             // Loop through grabbing everything
             var myRows = [];
             var $headers = $("th");
-            var $rows = $("tbody tr").each(function (index) {
+            var $rows = $("tbody tr").each(function(index) {
                 $cells = $(this).find("td");
                 myRows[index] = {};
-                $cells.each(function (cellIndex) {
+                $cells.each(function(cellIndex) {
                     myRows[index][$($headers[cellIndex]).html()] = $(this).html();
                 });
             });
@@ -101,18 +105,16 @@
             return "--"; //not found
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             var columnDefs = [
-           
+
                 {
                     data: "OrderType",
                     title: "Order Type"
-                },
-                {
+                }, {
                     data: "CustomerName",
                     title: "Customer Name"
-                },
-                {
+                }, {
                     data: "CustomerPhoneNumber",
                     title: "Phone Number"
                 },
@@ -120,10 +122,10 @@
             ];
             var table = $('table').DataTable({
                 ajax: {
-                    url: "/api/MeatOrders",
+                    url: "api/MeatOrders",
                 },
                 columns: columnDefs
-                    
+
             });
         });
         $('table.table').fadeIn();
