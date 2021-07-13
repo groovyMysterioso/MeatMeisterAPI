@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        function switchForm() {
+            $('div.animal').hide();
+            $('div.animal input[name=tag]').removeAttr('required');
+            $('div.animal input').attr('disabled', '');
+            $('div.animal textarea').attr('disabled', '');
+            $('#submition').show();
+            $('div#' + $('select#OrderType').val() + ' input[name=tag]').attr("required", "");
+            $('div#' + $('select#OrderType').val() + ' input').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val() + ' textarea').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val()).fadeIn();
+            $('button#submit').attr("formaction", "api/post" + $('select#OrderType').val());
+
+            var element = document.getElementById($('select#OrderType').val());
+            element.scrollIntoView();
+        }
+    </script>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Order Input</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <form action="Home.htm" id="main">
+                    <button title="if you need to go back without saving changes">
+                        <i class="fa fa-arrow-left"></i>Back
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Customer Info</h2>
+                <form method="post">
+                    <input type="hidden" name="MeatOrderID" id="MeatOrderID"/>
+                    <input type="hidden" name="ID" id="ID"/>
+                    <div class="form-group">
+                        <label for="customerName">Name:</label>
+                        <input name="customerName" id="CustomerName" class="form-control" placeholder="First Last" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number:</label><input name="customerPhoneNumber" id="CustomerPhoneNumber" placeholder="###-###-#####" class="form-control" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" title="Please enter a valid phone number" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Cut Date:</label>
+                        <input name="Date" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="orderType">Order Type</label>
+                        <select id="OrderType" name="orderType" class="form-control" onchange="switchForm();" width=485 height=61 title="Drop down menu to choose the type of order. What is chosen here will determine the next set of questions (different for each animal)." required>
+                            <option value="" hidden></option>
+                            <option value="Deer">Deer</option>
+                            <option value="Elk">Elk</option>
+                            <option value="Sheep">Sheep</option>
+                            <option value="Beef">Beef</option>
+                            <option value="Pig">Hog</option>
+                        </select>
+                    </div>
+                    <br />
+                    <div class="col-md-6">
+                        <div id="Deer" class="animal">
+                            <h2>Deer</h2>
+                            <label for="NameOnTag">Name on tag:</label><input name="NameOnTag" id="NameOnTag" class="form-control" />
+                            <label>Kill Date:</label><input name="killDate" id="KillDate" type="date" class="form-control" />
+                            <label for="loins">Loins:</label><input name="loins" id="Loins" class="form-control" />
+                            <label for="rounds">Rounds:</label><input name="rounds" id="Rounds" class="form-control" />
+                            <label for="steaks">Steaks:</label><input name="steaks" id="Steaks" class="form-control" />
+                            <label for="trim">Trim:</label><input name="trim" id="Trim" class="form-control" />
+                            <label for="notes">Notes:</label>
+                            <textarea name="notes" id="Notes" class="form-control">
+                            <br />
+                        </div>
+                        <div id="Elk" class="animal">
+                            <h2>Elk</h2>
+                            <label for="tag">Name on tag:</label><input name="NameOnTag" class="form-control" />
+                            <label>Kill Date:</label><input name="killDate" type="date" class="form-control" />
+                            <label for="loins">Loins:</label><input name="loins" class="form-control" />
+                            <label for="rounds">Rounds:</label><input name="rounds" class="form-control" />
+                            <label for="steaks">Steaks:</label><input name="steaks" class="form-control" />
+                            <label for="trim">Trim:</label><input name="trim" class="form-control" />
+                            <label for="notes">Notes:</label>
+                            <textarea name="notes" class="form-control">
+                            <br />
+                        </div>
+                        <div id="Sheep" class="animal">
+                            <h2>Sheep</h2>
+                            <label>Rancher name:</label><input name="RancherName" class="form-control" />
+                            <label>Rancher Phone number:</label><input name="rancherPhoneNumber" class="form-control" />
+                            <label>Kill Date:</label><input name="killDate" type="date" class="form-control" />
+                            <label>Loins:</label><input name="loins" class="form-control" />
+                            <label>Shoulders:</label><input name="shoulders" class="form-control" />
+                            <label>Rounds:</label><input name="rounds" class="form-control" />
+                            <label>Ribs:</label><input name="ribs" class="form-control" />
+                            <label>Shanks:</label><input name="shanks" class="form-control" />
+                            <label>Trim:</label><input name="trim" class="form-control" />
+                            <label>Notes:</label><textarea name="notes" class="form-control">
+                        </div>
+                        <div id="Pig" class="animal">
+                            <h2>Pig</h2>
+                            <label>Rancher name:</label>
+                            <input name="RancherName" class="form-control" />
+                            <label>Rancher Phone number:</label>
+                            <input name="rancherPhoneNumber" class="form-control" />
+                            <label>Kill Date:</label>
+                            <input name="killDate" type="date" class="form-control" />
+                            <label>Loins:</label>
+                            <input name="loins" class="form-control" />
+                            <label>Shoulders:</label>
+                            <input name="shoulders" class="form-control" />
+                            <label>Rounds:</label>
+                            <input name="rounds" class="form-control" />
+                            <label>Hocks:</label>
+                            <input name="hocks" class="form-control" />
+                            <label>Ribs:</label>
+                            <input name="ribs" class="form-control" />
+                            <label>Trim:</label>
+                            <input name="trim" class="form-control" />
+                            <label>Notes:</label>
+                            <textarea name="notes" class="form-control">
+                        </div>
+                        <div id="Beef" class="animal">
+                            <h2>Beef</h2>
+                            <label>Rancher name:</label>
+                            <input name="rancherName" class="form-control" />
+                            <label>Rancher Phone number:</label>
+                            <input name="rancherPhoneNumber" class="form-control" />
+                            <label>Kill Date:</label>
+                            <input name="killDate" type="date" class="form-control" />
+                            <label>Loins:</label>
+                            <input name="loins" class="form-control" />
+                            <label>Shoulders:</label>
+                            <input name="shoulders" class="form-control" />
+                            <label>Rounds:</label>
+                            <input name="rounds" class="form-control" />
+                            <label>Skirt/flank:</label>
+                            <input name="shirtFlanks" class="form-control" />
+                            <label>Ribs:</label>
+                            <input name="ribs" class="form-control" />
+                            <label>Trim:</label>
+                            <input name="trim" class="form-control" />
+                            <label>Brisket:</label>
+                            <input name="brisket" class="form-control" />
+                            <label>Sirloin tip:</label>
+                            <input name="siorLoinTip" class="form-control" />
+                            <label>Notes:</label>
+                            <textarea name="notes" class="form-control">
+                        </div>
+                        <div id="submition" class="form-group">
+                            <button class="pat-button">Activate Order</button>
+                            <button class="pat-button">Deactivate Order</button>
+                            <button id="submit" class="pat-button">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+   
+        $().ready(function () {
+
+            var editMode = $('input#editRowBtn').val() != "false";
+
+            if (editMode) {
+               switchForm();
+                $.post({
+                    url: "/api/getMeatOrder/" + $("#MeatOrderID").val(),
+                    method:"get",
+                    success: function (data) {
+                        for (key in data.data) {
+                        console.log(key);
+                                $('input#' + key + '').val(data.data[key]);
+                        }
+                    }
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

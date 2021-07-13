@@ -1,0 +1,150 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Database</h1>
+        <form>
+            <button formaction="Home.htm"><i class="fa fa-arrow-left"></i>Back</button>
+        </form>
+        <table class="table">
+            
+        </table>
+    </div>
+
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        $(document).ready(function () {
+
+            var columnDefs = [
+                {
+                    data: "MeatOrderID",
+                    title: "MeatOrderID",
+                    type: "readonly"
+                },
+                {
+                    data: "OrderType",
+                    title: "Order Type"
+                },
+                {
+                    data: "CustomerName",
+                    title: "Customer Name"
+                },
+                {
+                    data: "CustomerPhoneNumber",
+                    title: "Phone Number"
+                },
+
+            ];
+
+            var table = $('table').DataTable({
+                "sPaginationType": "full_numbers",
+                ajax: {
+                    url: "MeatMeister/api/MeatOrders",
+                },
+                columns: columnDefs,
+                dom: 'Bfrtip',        // Needs button container
+                select: 'single',
+                responsive: true,
+                altEditor: true,     // Enable altEditor
+                buttons: [
+                    {
+                        text: 'Add',
+                        name: 'add'        // do not change name
+                    },
+                    {
+                        extend: 'selected', // Bind to Selected row
+                        text: 'Edit',
+                        name: 'edit'        // do not change name
+                    },
+                    {
+                        extend: 'selected', // Bind to Selected row
+                        text: 'Delete',
+                        name: 'delete'      // do not change name
+                    },
+                    {
+                        text: 'Refresh',
+                        name: 'refresh'      // do not change name
+                    }
+                ],
+                onAddRow: function (datatable, rowdata, success, error) {
+                    console.log(rowdata);
+                    $.ajax({
+                        // a tipycal url would be / with type='PUT'
+                        url: "api/postMeatOrder",
+                        type: 'GET',
+                        data: rowdata,
+                        success: success,
+                        error: error
+                    });
+                },
+                onDeleteRow: function (datatable, rowdata, success, error) {
+                    $.ajax({
+                        // a tipycal url would be /{id} with type='DELETE'
+                        url: "api/deleteMeatOrder/{MeatOrderID}",
+                        type: 'GET',
+                        data: rowdata,
+                        success: success,
+                        error: error
+                    });
+                },
+                onEditRow: function (datatable, rowdata, success, error) {
+                    var util = {};
+                    util.post = function (url, fields) {
+                        var $form = $('<form>', {
+                            action: url,
+                            method: 'get'
+                        });
+                        $.each(fields, function (key, val) {
+                            if (key != "undefined" && val != "")
+                                $('<input>').attr({
+                                    type: "hidden",
+                                    name: key,
+                                    value: val
+                                }).appendTo($form);
+                        });
+                        $form.appendTo('body').submit();
+                    }
+                    util.post('Order.htm', rowdata);
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
