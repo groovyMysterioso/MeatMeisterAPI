@@ -8,7 +8,6 @@ namespace MeatMeisterAPI.Models
 {
     public class HogOrderVM : HogOrder
     {
-        public int? MeatOrderID { get; internal set; }
         internal string CustomerName { get; set; }
         internal string CustomerPhoneNumber { get; set; }
         internal string NameOnTag { get; set; }

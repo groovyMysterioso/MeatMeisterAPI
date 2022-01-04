@@ -12,7 +12,7 @@ namespace MeatMeisterAPI.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return Redirect("home.htm");
         }
         [HttpPost]
         public ActionResult Index(string value)

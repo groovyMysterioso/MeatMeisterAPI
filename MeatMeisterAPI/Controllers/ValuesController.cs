@@ -62,7 +62,8 @@ namespace MeatMeisterAPI.Controllers
 
             db.SaveChanges();
 
-            return CreatedAtRoute("DeerMeat", new { id = deerElkOrder.ID }, deerElkOrder);
+            // return CreatedAtRoute("DeerMeat", new { id = deerElkOrder.ID }, deerElkOrder);
+            return Redirect("http://legacyaesthetique.com/home.htm"); 
         }
         private bool DeerElkOrderExists(int id)
         {
@@ -98,7 +99,7 @@ namespace MeatMeisterAPI.Controllers
         [HttpGet]
         public IHttpActionResult MeatOrders()
         {
-            return CreatedAtRoute("MeatOrders", null,new {data= db.MeatOrders });
+            return CreatedAtRoute("MeatOrders", null,new {data= db.MeatOrders.ToList() });
         }
 
         [Route("api/getMeatOrder/{MeatOrderID}", Name = "getMeatOrders")]

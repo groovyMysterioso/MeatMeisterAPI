@@ -1,0 +1,25 @@
+.table{
+    display:none;
+}
+.pat-button {
+    width: 156;
+    height: 42;
+}
+.pat-button-top {
+    width: 211;
+    height: 48;
+}
+.animal {
+    display: none;
+}
+#submition {
+    display: none;
+}
+.back {
+    width: 77;
+    height: 29;
+    alt: "&lt;- BACK ";
+}
+html {
+    scroll-behavior: smooth;
+  }

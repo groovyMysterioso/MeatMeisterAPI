@@ -3,13 +3,27 @@
     $().ready(function () {
         $('form').hide();
     });
+    function ajaxPostForm(form,url) {
+            var formData = new FormData(form);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    window.document.reload();
+                }
+            });
+        }
     function switchForm() {
         $('form').hide();
         $('form#' + $('select#orderType').val().toLowerCase()).show();
     }
 </script>
-<select id="orderType" onchange="switchForm();">
     <img width=485 height=61 title="Drop down menu to choose the type of order. What is chosen here will determine the next set of questions (different for each animal). ">
+<select id="orderType" onchange="switchForm();">
     ORDER TYPE
     <option value="" selected="" disabled="" hidden="">ORDER TYPE</option>
     <option value="deerElk">Deer/Elk</option>

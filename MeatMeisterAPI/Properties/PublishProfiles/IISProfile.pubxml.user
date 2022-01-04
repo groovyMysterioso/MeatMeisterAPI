@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2XUmoeDlTEyWYJsjwXq4IQAAAAACAAAAAAAQZgAAAAEAACAAAAC1cAcTXz0rQVQeVnCqiAn4P8ilbU4fw/2+13gwawr9rQAAAAAOgAAAAAIAACAAAACxiP954ZJ33a8eCR63oLXNEEc1c726VF7IjoME8tD8eTAAAACy8pqsMFNn+Df/+NOhTO1e4kvMluibjn1J3Dkz0aUivbVyQHZbZu5qkVtECiegzglAAAAA4eAdwY0u/9fyR4hC3khHmBx0X26+VNn5EA2iDn/b4s8MXObSk+10IlBeSpgm5wKEjGo01pvTC4KxB8GODkF12Q==</EncryptedPassword>
-    <History>True|2021-07-13T20:06:27.0057946Z;True|2021-07-13T14:20:57.6117819-05:00;True|2021-04-17T00:10:41.3605732-05:00;True|2021-04-16T20:56:36.9241130-05:00;True|2021-04-16T20:53:57.5131766-05:00;True|2021-04-16T20:52:42.0577102-05:00;True|2021-04-16T20:51:12.5438003-05:00;</History>
+    <EncryptedPassword />
+    <History>True|2022-01-03T17:24:48.2732508Z;True|2021-12-28T22:59:06.4221399-06:00;</History>
   </PropertyGroup>
 </Project>
