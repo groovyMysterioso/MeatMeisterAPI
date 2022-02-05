@@ -21,6 +21,8 @@ namespace MeatMeisterAPI.Models
         public string Shanks { get; set; }
         public int? MeatOrderID { get; set; }
         public virtual MeatOrder MeatOrder { get; set; }
+        public bool? isActive { get; set; }
+
 
 
     }

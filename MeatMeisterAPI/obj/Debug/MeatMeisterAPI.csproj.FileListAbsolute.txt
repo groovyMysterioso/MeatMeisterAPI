@@ -174,9 +174,10 @@ E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\System.Web.WebPage
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\Antlr3.Runtime.pdb
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.csproj.AssemblyReference.cache
-E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.Migrations.initial.resources
-E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.csproj.GenerateResource.cache
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.csproj.CoreCompileInputs.cache
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.csproj.CopyComplete
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.dll
 E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.pdb
+E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.Migrations.initial.resources
+E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.csproj.GenerateResource.cache
+E:\Users\james\source\repos\MeatMeisterAPI\MeatMeisterAPI\obj\Debug\MeatMeisterAPI.Migrations.initial2.resources

@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -41,6 +43,10 @@ namespace MeatMeisterAPI.Controllers
             else
             {
                 db.Entry(deerElkOrder).State = EntityState.Modified;
+                var MeatOrder = db.MeatOrders.Find(deerElkOrder.MeatOrderID);
+                MeatOrder.isActive = deerElkOrder.isActive.Value;
+                db.Entry(MeatOrder).State = EntityState.Modified;
+                db.Entry(deerElkOrder).State = EntityState.Modified;
                 deerElkOrder.ID = db.DeerElkOrders.Where(x => x.MeatOrderID == deerElkOrder.MeatOrderID).First().ID;
 
                 try
@@ -61,9 +67,13 @@ namespace MeatMeisterAPI.Controllers
             }
 
             db.SaveChanges();
-
-            // return CreatedAtRoute("DeerMeat", new { id = deerElkOrder.ID }, deerElkOrder);
-            return Redirect("http://legacyaesthetique.com/home.htm"); 
+            var newUrl = this.Url.Link("Default", new
+            {
+                Controller = "Home",
+                Action = "Index"
+            });
+            
+            return CreatedAtRoute("DeerMeat", new { id = deerElkOrder.ID }, deerElkOrder);
         }
         private bool DeerElkOrderExists(int id)
         {
@@ -77,29 +87,36 @@ namespace MeatMeisterAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (deerElkOrder.MeatOrderID == null)
+            if (deerElkOrder.MeatOrder.MeatOrderID == null)
             {
 
                 var MeatOrder = db.MeatOrders.Add(new MeatOrder(deerElkOrder));
             db.SaveChanges();
             var orderID = MeatOrder.MeatOrderID;
-            deerElkOrder.MeatOrderID = orderID;
+            deerElkOrder.MeatOrder.MeatOrderID = orderID;
             db.DeerElkOrders.Add(deerElkOrder);
             }
             else
             {
-                var editingRecord = db.DeerElkOrders.Where(x => x.MeatOrderID == deerElkOrder.MeatOrderID).FirstOrDefault();
+                var editingRecord = db.DeerElkOrders.Where(x => x.MeatOrder.MeatOrderID == deerElkOrder.MeatOrder.MeatOrderID).FirstOrDefault();
                 editingRecord = deerElkOrder;
             }
             db.SaveChanges();
 
             return CreatedAtRoute("ElkMeat", new { id = deerElkOrder.ID }, deerElkOrder);
         }
-        [Route("api/MeatOrders",Name = "MeatOrders")]
+        [Route("api/ActiveMeatOrders",Name = "ActiveMeatOrders")]
         [HttpGet]
-        public IHttpActionResult MeatOrders()
+        public IHttpActionResult ActiveMeatOrders()
         {
-            return CreatedAtRoute("MeatOrders", null,new {data= db.MeatOrders.ToList() });
+            return CreatedAtRoute("MeatOrders", null,new {data= db.MeatOrders.Where(_=> _.isActive).ToList() });
+        }
+
+        [Route("api/MeatOrders", Name = "MeatOrders")]
+        [HttpGet]
+        public IHttpActionResult AllMeatOrders()
+        {
+            return CreatedAtRoute("MeatOrders", null, new { data = db.MeatOrders.OrderBy(_ => _.isActive).ToList() });
         }
 
         [Route("api/getMeatOrder/{MeatOrderID}", Name = "getMeatOrders")]
@@ -224,7 +241,7 @@ namespace MeatMeisterAPI.Controllers
             {
                 case MeatOrder.OrderTypes.Deer:
                 case MeatOrder.OrderTypes.Elk:
-                    var deerElk = db.DeerElkOrders.Where(x => x.MeatOrderID == MeatOrderID).FirstOrDefault();
+                    var deerElk = db.DeerElkOrders.Where(x => x.MeatOrder.MeatOrderID == MeatOrderID).FirstOrDefault();
                     db.DeerElkOrders.Remove(deerElk);
                     break;
                 case MeatOrder.OrderTypes.Hog:

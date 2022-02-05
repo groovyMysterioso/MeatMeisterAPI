@@ -17,6 +17,7 @@ namespace MeatMeisterAPI.Models
         public string RancherName { get; set; }
         public string Notes { get; set; }
         public OrderTypes OrderType { get; set; }
+        public bool isActive { get; set; } = true;
 
         public enum OrderTypes
         {
@@ -34,6 +35,7 @@ namespace MeatMeisterAPI.Models
             Loins = deerElkOrderVM.Loins;
             Rounds = deerElkOrderVM.Rounds;
             Trim = deerElkOrderVM.Trim;
+            isActive = deerElkOrderVM.isActive.Value;
         }
         public MeatOrder(BeefOrderVM beefOrderVM)
         {

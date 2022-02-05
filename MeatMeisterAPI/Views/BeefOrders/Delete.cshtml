@@ -1,0 +1,88 @@
+﻿@model MeatMeisterAPI.Models.BeefOrder
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BeefOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MeatOrder.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeatOrder.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RancherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RancherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RancherPhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RancherPhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shoulders)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shoulders)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Steaks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Steaks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ribs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ribs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brisket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brisket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SirloinTips)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SirloinTips)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

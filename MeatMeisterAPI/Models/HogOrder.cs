@@ -18,6 +18,8 @@ namespace MeatMeisterAPI.Models
         public string Ribs { get; set; }
         public int? MeatOrderID { get; set; }
         public virtual MeatOrder MeatOrder {get;set;}
+        public bool? isActive { get; set; }
+
 
     }
 }

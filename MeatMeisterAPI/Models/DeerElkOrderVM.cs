@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MeatMeisterAPI.Models
 {
-    public class DeerElkOrderVM :DeerElkOrder
+    public class DeerElkOrderVM : DeerElkOrder
     {
         [Key]
         public string CustomerName { get; set; }
@@ -16,10 +16,10 @@ namespace MeatMeisterAPI.Models
         public string Rounds { get; set; }
         public string Trim { get; set; }
         public string Notes { get; set; }
+        public bool? isActive { get; set; }
 
         public DeerElkOrderVM()
         {
-
         }
     }
 }
