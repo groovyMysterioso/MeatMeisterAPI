@@ -22,9 +22,9 @@
             $('div.animal input').attr('disabled', '');
             $('div.animal textarea').attr('disabled', '');
             $('#submition').show();
-            $('div#' + $('select#OrderType').val() + ' input[name=Tag]').attr("required", "");
-            $('div#' + $('select#OrderType').val() + ' input').removeAttr("disabled");
-            $('div#' + $('select#OrderType').val() + ' textarea').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val()).find('input[name=Tag]').attr("required", "");
+            $('div#' + $('select#OrderType').val()).find('input').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val()).find('textarea').removeAttr("disabled");
             $('div#' + $('select#OrderType').val()).fadeIn();
             $('button#deactivate').on("click", function (e) {
                 e.preventDefault();
@@ -187,11 +187,12 @@
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-        $().ready(function() {
+        $().ready(function () {
 
-            var editMode = $('input#editRowBtn').val() != "false";
+            var editMode = true;//$('input#editRowBtn').val() != "false";
+
             (new URL(window.location.href)).searchParams.forEach((x, y) =>
-                document.getElementById(y).value = x);
+                document.getElementById(y).value = x ?? "");
 
             if (editMode) {
                 $.post({

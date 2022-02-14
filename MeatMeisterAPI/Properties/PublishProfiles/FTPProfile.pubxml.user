@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArdblfxhAzU6rzwa1x2QGDgAAAAACAAAAAAAQZgAAAAEAACAAAAD6ei1VnYLK3TIEATK4P9EzVTVOM5vJMLy7egWODWsivAAAAAAOgAAAAAIAACAAAAA4IKLtKvYpkdVjw8wEmeVE6aaSN+O//QU3a7j2GCWI6iAAAADB6mbbmPnGHOtEzjvcgelhrnaGtWMoQy9WAFrJJ8DtdEAAAAAHcpDWGZBt+t9OzaQnvRhqe48Rni3+HULPkPZ//xeSAIfhCC6+LrtNYmjwjoVPwPbJHp6Ci0N7Hnk1kPbbqbE5</EncryptedPassword>
     <_PublishTargetUrl>ftp://legacyaesthetique.com/wwwroot</_PublishTargetUrl>
-    <History>True|2022-02-06T22:06:57.4886159Z;False|2022-02-06T15:48:29.8162265-06:00;False|2022-02-06T15:42:39.6409555-06:00;False|2022-02-06T15:39:20.4320287-06:00;False|2022-02-06T15:39:00.1980214-06:00;False|2022-02-06T15:36:05.7674683-06:00;False|2022-02-06T15:35:05.9805446-06:00;False|2022-02-06T15:34:11.5544818-06:00;False|2022-02-06T15:29:40.7699597-06:00;False|2022-02-06T15:28:43.1550775-06:00;True|2022-02-05T17:47:30.1187464-06:00;True|2022-02-05T12:24:59.3422326-06:00;True|2022-01-03T12:36:12.5652586-06:00;True|2022-01-03T12:23:03.8241662-06:00;True|2022-01-03T12:05:12.9439834-06:00;True|2022-01-03T11:55:44.5581386-06:00;True|2022-01-03T11:47:16.6166222-06:00;True|2022-01-03T11:41:34.5069686-06:00;False|2022-01-03T11:33:51.3183960-06:00;False|2022-01-03T11:26:18.7555856-06:00;True|2021-12-09T17:37:11.0676350-06:00;True|2021-12-09T17:29:26.8391518-06:00;True|2021-12-09T15:52:05.5167325-06:00;True|2021-12-09T12:56:33.1118586-06:00;True|2021-12-08T21:53:56.8429975-06:00;True|2021-12-08T21:50:18.4071215-06:00;True|2021-12-08T21:48:30.4462079-06:00;True|2021-12-08T21:47:49.1501561-06:00;</History>
+    <History>True|2022-02-12T05:11:29.8896203Z;False|2022-02-11T22:58:16.7284177-06:00;False|2022-02-11T00:04:53.3307582-06:00;False|2022-02-10T23:59:42.9477147-06:00;True|2022-02-06T16:06:57.4886159-06:00;False|2022-02-06T15:48:29.8162265-06:00;False|2022-02-06T15:42:39.6409555-06:00;False|2022-02-06T15:39:20.4320287-06:00;False|2022-02-06T15:39:00.1980214-06:00;False|2022-02-06T15:36:05.7674683-06:00;False|2022-02-06T15:35:05.9805446-06:00;False|2022-02-06T15:34:11.5544818-06:00;False|2022-02-06T15:29:40.7699597-06:00;False|2022-02-06T15:28:43.1550775-06:00;True|2022-02-05T17:47:30.1187464-06:00;True|2022-02-05T12:24:59.3422326-06:00;True|2022-01-03T12:36:12.5652586-06:00;True|2022-01-03T12:23:03.8241662-06:00;True|2022-01-03T12:05:12.9439834-06:00;True|2022-01-03T11:55:44.5581386-06:00;True|2022-01-03T11:47:16.6166222-06:00;True|2022-01-03T11:41:34.5069686-06:00;False|2022-01-03T11:33:51.3183960-06:00;False|2022-01-03T11:26:18.7555856-06:00;True|2021-12-09T17:37:11.0676350-06:00;True|2021-12-09T17:29:26.8391518-06:00;True|2021-12-09T15:52:05.5167325-06:00;True|2021-12-09T12:56:33.1118586-06:00;True|2021-12-08T21:53:56.8429975-06:00;True|2021-12-08T21:50:18.4071215-06:00;True|2021-12-08T21:48:30.4462079-06:00;True|2021-12-08T21:47:49.1501561-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include=".vscode/settings.json">
@@ -87,10 +87,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 17:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>02/06/2022 16:04:46</publishTime>
+      <publishTime>02/11/2022 23:11:17</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>02/06/2022 16:04:46</publishTime>
+      <publishTime>02/11/2022 23:11:17</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -351,7 +351,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/27/2020 01:19:40</publishTime>
     </File>
     <File Include="Home.htm">
-      <publishTime>02/05/2022 14:32:51</publishTime>
+      <publishTime>02/10/2022 23:13:09</publishTime>
     </File>
     <File Include="includeHtml.js">
       <publishTime>01/08/2021 20:47:06</publishTime>
@@ -360,10 +360,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/06/2022 15:26:23</publishTime>
     </File>
     <File Include="Order.htm">
-      <publishTime>02/05/2022 17:07:13</publishTime>
+      <publishTime>02/10/2022 23:11:11</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>02/06/2022 16:04:45</publishTime>
+      <publishTime>02/11/2022 23:11:15</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>12/27/2020 01:19:47</publishTime>
