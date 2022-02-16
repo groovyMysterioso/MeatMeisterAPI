@@ -12,6 +12,59 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .autocomplete {
+            /*the container must be positioned relative:*/
+            position: relative;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+            input[type=text] {
+                background-color: #f1f1f1;
+                width: 100%;
+            }
+
+            input[type=submit] {
+                background-color: DodgerBlue;
+                color: #fff;
+            }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+            .autocomplete-items div {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+            }
+
+                .autocomplete-items div:hover {
+                    /*when hovering an item:*/
+                    background-color: #e9e9e9;
+                }
+
+        .autocomplete-active {
+            /*when navigating through the items using the arrow keys:*/
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,17 +75,11 @@
             $('div.animal input').attr('disabled', '');
             $('div.animal textarea').attr('disabled', '');
             $('#submition').show();
-            $('div#' + $('select#OrderType').val()).find('input[name=Tag]').attr("required", "");
-            $('div#' + $('select#OrderType').val()).find('input').removeAttr("disabled");
-            $('div#' + $('select#OrderType').val()).find('textarea').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val() + ' input[name=Tag]').attr("required", "");
+            $('div#' + $('select#OrderType').val() + ' input').removeAttr("disabled");
+            $('div#' + $('select#OrderType').val() + ' textarea').removeAttr("disabled");
             $('div#' + $('select#OrderType').val()).fadeIn();
-            $('button#deactivate').on("click", function (e) {
-                e.preventDefault();
-                var checkbox = document.getElementById('isActive');
-                $(checkbox).val("false");
-                $('button#submit').trigger("click");
-
-            });
+            
             $('button#submit').attr("formaction", "home/Post" + $('select#OrderType').val());
 
             var element = document.getElementById($('select#OrderType').val());
@@ -47,7 +94,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <form action="Home.htm" id="main">
+                <form  action="Home.htm" id="main">
                     <button title="if you need to go back without saving changes">
                         <i class="fa fa-arrow-left"></i>Back
                     </button>
@@ -57,12 +104,12 @@
         <div class="row">
             <div class="col-md-9">
                 <h2>Customer Info</h2>
-                <form method="post">
+                <form  autocomplete="off" method="post">
                     <input type="hidden" name="MeatOrderID" id="MeatOrderID" />
                     <input type="hidden" name="ID" id="ID" />
-                    <div class="form-group">
+                    <div class="form-group autocomplete">
                         <label for="customerName">Name:</label>
-                        <input name="customerName" id="CustomerName" class="form-control" placeholder="First Last" required />
+                        <input name="customerName" id="CustomerName" class="form-control" autocomlpete="blargal" placeholder="First Last" required autofocus/>
                     </div>
                     <div class="form-group">
                         <label>Phone Number:</label><input name="customerPhoneNumber" id="CustomerPhoneNumber" placeholder="###-###-#####" class="form-control" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$" title="Please enter a valid phone number"
@@ -187,14 +234,16 @@
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
-        $().ready(function () {
-
-            var editMode = true;//$('input#editRowBtn').val() != "false";
-
+        $().ready(function() {
+            setTimeout(1000, function () {
+                $('input#CustomerName').focus();
+            });
+            var editMode = $('input#editRowBtn').val() != "false";
             (new URL(window.location.href)).searchParams.forEach((x, y) =>
-                document.getElementById(y).value = x ?? "");
+                document.getElementById(y).value = x);
+            $('input#CustomerName').focus();
 
-            if (editMode) {
+            if (false) {
                 $.post({
                     url: "api/getMeatOrder/" + $("#MeatOrderID").val(),
                     method: "get",
@@ -212,13 +261,153 @@
 
                         }
                     }
+
                 })
                 switchForm();
             
             }
+            $('button#deactivate').on("click", function (e) {
+                e.preventDefault();
+                var checkbox = document.getElementById('isActive');
+                $(checkbox).val("false");
+                $('button#submit').trigger("click");
 
-
+            });
         });
+
+
+
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+
+                            inputNumber(inp.value);
+
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /*An array containing all the country names in the world:*/
+        var CustomerNames = [];
+        var CustomerNumbers = [];
+        $.get({
+
+            url: "api/CustomersAutocomplete",
+            success: function (response, status) {
+                CustomerNames = response.data.ReturnContacts;
+                CustomerNumbers = response.data.ReturnNumbers;
+                autocomplete(document.getElementById("CustomerName"), CustomerNames);
+                $('#CustomerName').on('blur', function () {
+                    var CustomerValue = $(this).val();
+                    var CustomerIndex = CustomerNames.indexOf(CustomerValue);
+                    var PhoneValue = CustomerNumbers[CustomerIndex];
+                    $('#CustomerPhoneNumber').val(PhoneValue);
+                }
+            );
+            }
+
+        }
+        );
+
+        function inputNumber(selectedName) {
+            var CustomerValue = selectedName;
+            var CustomerIndex = CustomerNames.indexOf(CustomerValue);
+            var PhoneValue = CustomerNumbers[CustomerIndex];
+            console.log(CustomerValue);
+            console.log(CustomerIndex);
+            $('#CustomerPhoneNumber').val(PhoneValue);
+        }
+        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 
     </script>
 </body>

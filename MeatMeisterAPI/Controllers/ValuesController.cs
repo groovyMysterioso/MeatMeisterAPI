@@ -112,6 +112,18 @@ namespace MeatMeisterAPI.Controllers
             return CreatedAtRoute("MeatOrders", null,new {data= db.MeatOrders.Where(_=> _.isActive).ToList() });
         }
 
+        [Route("api/CustomersAutocomplete", Name = "CustomersAutocomplete")]
+        [HttpGet]
+        public IHttpActionResult CustomersAutocomplete()
+        {
+            var PossibleContacts = db.MeatOrders.Distinct();
+            var ReturnContacts = PossibleContacts.Select(x => x.CustomerName);
+            var ReturnNumbers = PossibleContacts.Select(_ => _.CustomerPhoneNumber);
+            var responseObject = new { ReturnContacts, ReturnNumbers };
+
+
+            return CreatedAtRoute("CustomersAutocomplete", null, new { data = responseObject } );
+        }
         [Route("api/MeatOrders", Name = "MeatOrders")]
         [HttpGet]
         public IHttpActionResult AllMeatOrders()

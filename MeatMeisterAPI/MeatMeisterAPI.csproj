@@ -184,6 +184,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\BeefOrder.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\DeerElkOrder.cs" />
     <Compile Include="Models\HogOrder.cs" />
     <Compile Include="Models\HogOrderVM.cs" />
