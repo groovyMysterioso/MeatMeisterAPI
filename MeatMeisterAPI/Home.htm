@@ -61,7 +61,33 @@
                 },
                 columns: columnDefs
             });
+        $('table').on('click', 'tbody tr', function () {
+            var row = table.row($(this)).data();
+            console.log(row);   //full row of array data
+            console.log(row[1]);   //EmployeeId
+
+            var util = {};
+            util.post = function (url, fields) {
+                var $form = $('<form>', {
+                    action: url,
+                    method: 'get'
+                });
+                $.each(fields, function (key, val) {
+                    if (key == "MeatOrderID" || key == "OrderType")
+                        $('<input>').attr({
+                            type: "hidden",
+                            name: key,
+                            value: val
+                        }).appendTo($form);
+                });
+                $form.appendTo('body').submit();
+            }
+            util.post('Order.htm', row);
+
+
         });
+        });
+
         $('table.table').fadeIn();
     </script>
 </body>
